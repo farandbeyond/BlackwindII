@@ -17,8 +17,8 @@ public class BattleActionTester {
     public static void main(String[] args){
         text("----------Test01----------");
         text("Creation of battle actions");
-        BattleEntity tester = EntityLoader.loadEntity(0);
-        BattleEntity target = EntityLoader.loadEntity(1);
+        BattleEntity tester = EntityLoader.loadPartyMember(0);
+        BattleEntity target = EntityLoader.loadPartyMember(1);
         BattleAction[] actions = new BattleAction[10];
         actions[0]=new DamageSpell(0,tester,"Fireball","deals 15-20 firedamage",15,5,Element.FIRE,12);
         actions[1]=new HealingSpell(0,tester,"Cure","heals 10-15 hp",10,5,false,10);

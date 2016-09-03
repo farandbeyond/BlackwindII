@@ -10,7 +10,13 @@ package Background.Entities;
  * @author Connor
  */
 public class EntityLoader {
-    public static BattleEntity loadEntity(int id){
+    public static Enemy loadEnemy(int id){
+        switch(id){
+            case 100: return new Enemy("Training Dummy",20,10,8,8,16,3,3,Element.EARTH,25,10);
+        }
+        return null;
+    }
+    public static PartyMember loadPartyMember(int id){
         switch(id){
             //                              name       hp      mp       str     dex    vit    int    res    element       level
             case 0: return new PartyMember("Wilson",  20,2.5, 10,1.25, 10,1.9, 5,0.5,  10,1.9, 3,0.3,  8,1.7,Element.NEUTRAL,1,0);
@@ -20,9 +26,6 @@ public class EntityLoader {
         }
         System.out.println("Invalid id");
         return null;
-    }
-    public static PartyMember loadPartyMember(int id){
-        return (PartyMember)loadEntity(id);
     }
     
 }

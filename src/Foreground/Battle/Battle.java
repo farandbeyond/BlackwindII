@@ -5,10 +5,30 @@
  */
 package Foreground.Battle;
 
+import Foreground.HandlerMenu;
+
 /**
  *
  * @author Connor
  */
-public class Battle {
+public class Battle extends HandlerMenu{
+
+    
+    @Override
+    public void upEvent() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    @Override
+    public void downEvent() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    @Override
+    public void rightEvent() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    @Override
+    public void leftEvent() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

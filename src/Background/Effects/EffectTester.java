@@ -15,7 +15,7 @@ import Background.Entities.EntityLoader;
 public class EffectTester {
     public static void main(String[] args) {
         test("init");
-        BattleEntity e = EntityLoader.loadEntity(0);
+        BattleEntity e = EntityLoader.loadPartyMember(0);
         e.printAllStats();
         e.giveEffect(Effect.loadStatAltering(Effect.BUFF, "Attack up", "magic", 3, BattleEntity.STR, 0.50));
         test("check effect");

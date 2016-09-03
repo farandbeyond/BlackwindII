@@ -5,6 +5,9 @@
  */
 package Background.Entities;
 
+import Background.BattleActions.BattleAction;
+import Foreground.EnemyAI;
+
 /**
  *
  * @author Connor
@@ -13,11 +16,22 @@ public class Enemy extends BattleEntity{
     //BattleAction listOfActions
     int xpGiven;
     int goldGiven;
+    EnemyAI ai;
     //Item itemDropped;
-    public Enemy(String name, int baseHP, double hpGrowth, int baseMP, double mpGrowth, int baseStr, double strGrowth, int baseDex, double dexGrowth, int baseVit, double vitGrowth, int baseInt, double intGrowth, int baseRes, double resGrowth, int element, int xpGiven, int goldGiven) {
-        super(name, baseHP, hpGrowth, baseMP, mpGrowth, baseStr, strGrowth, baseDex, dexGrowth, baseVit, vitGrowth, baseInt, intGrowth, baseRes, resGrowth, element);
+    public Enemy(String name, int baseHP, int baseMP, int baseStr, int baseDex, int baseVit, int baseInt, int baseRes, int element, int xpGiven, int goldGiven) {
+        super(name, baseHP, 1.0, baseMP, 1.0, baseStr, 1.0, baseDex, 1.0, baseVit, 1.0, baseInt, 1.0, baseRes, 1.0, element);
         this.xpGiven = xpGiven;
         this.goldGiven = goldGiven;
     }
+    public void giveAI(EnemyAI ai){
+        ai.setEnemy(this);
+        this.ai = ai;
+    }
+
+    
+    public BattleAction getSkill() {
+        return ai.getAction();
+    }
+    
     
 }
