@@ -6,8 +6,7 @@
 package Foreground;
 
 import Background.BattleActions.*;
-import Background.Entities.Enemy;
-import Background.Entities.EntityLoader;
+import Background.Entities.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -84,6 +83,46 @@ public class EnemyAI {
             return getSkill(weighSkills(e.getSkillList()));
     }
     
+    public BattleEntity getTarget(BattleAction b, Set s, Party p){
+        ArrayList<BattleEntity> possibleTargets = new ArrayList<>();
+        //System.out.println(b.getName());
+        //System.out.println(b.getClass().toGenericString());
+        if(b.getClass()==SelfBuff.class||b.getClass()==DeathAction.class){
+            return e;
+        }else if(b.targetsAllies()){
+            //System.out.println("Target Allies");
+            if(b.getClass()==HealingSpell.class){
+                for(Enemy en:s.getEnemyList()){
+                    if(en.isDamaged()&&!en.isDead())
+                        possibleTargets.add(en);
+                }
+            }else if(b.getClass()==EffectSpell.class){
+                for(Enemy en:s.getEnemyList())
+                    possibleTargets.add(en);
+            }
+        }else{
+            //System.out.println("Target Enemies");
+            if(b.getClass()==DamageSpell.class||b.getClass()==PhysicalAction.class){
+                //System.out.println("Damaging ability found");
+                for(PartyMember en:p.getMemberList()){
+                    //System.out.println("Entered Loop");
+                    //System.out.printf("%s: %d/%d\n", en.getName(),en.getStat(BattleEntity.HP).getStat(),en.getStat(BattleEntity.HP).getMax());
+                    for(int i=0;i<1+(en.getMissingHpPercentile()/10)*e.getElementModifier(b.getElement());i++){
+                        //System.out.println(en.getName()+" added "+(i+1)+" times.");
+                        if(!en.isDead())
+                            possibleTargets.add(en);
+                    }
+                }
+            }else if(b.getClass()==EffectSpell.class){
+                for(PartyMember en:p.getMemberList())
+                    possibleTargets.add(en);
+            }
+        }
+        for(BattleEntity en:possibleTargets)
+            System.out.println(en.getName());
+        return possibleTargets.get(rand.nextInt(possibleTargets.size()));
+    }
+    
     public void setEnemy(Enemy e){this.e=e;}
     
     public static void main(String[] args) {
@@ -135,28 +174,48 @@ public class EnemyAI {
         
         BattleAction[] actions = new BattleAction[5];
         System.out.println("\nEnemy 0\n");
-        actions[0]=e0.getSkill();
+        actions[0]=e0.getAiSkill();
         System.out.println("\nEnemy 1\n");
-        actions[1]=e1.getSkill();
+        actions[1]=e1.getAiSkill();
         System.out.println("\nEnemy 2\n");
-        actions[2]=e2.getSkill();
+        actions[2]=e2.getAiSkill();
         System.out.println("\nEnemy 3\n");
-        actions[3]=e3.getSkill();
+        actions[3]=e3.getAiSkill();
         System.out.println("\nEnemy 4\n");
-        actions[4]=e4.getSkill();
+        actions[4]=e4.getAiSkill();
         System.out.println("\nActions Selected\n");
         for(BattleAction b:actions){
             System.out.println(b.getName());
         }
         System.out.println("\nSpamm Enemy 0\n");
-        System.out.println(e4.getSkill().getName());
-        System.out.println(e4.getSkill().getName());
-        System.out.println(e4.getSkill().getName());
-        System.out.println(e4.getSkill().getName());
-        System.out.println(e4.getSkill().getName());
-        System.out.println(e4.getSkill().getName());
-        System.out.println(e4.getSkill().getName());
-        System.out.println(e4.getSkill().getName());
-        System.out.println(e4.getSkill().getName());
+        System.out.println(e4.getAiSkill().getName());
+        System.out.println(e4.getAiSkill().getName());
+        System.out.println(e4.getAiSkill().getName());
+        System.out.println(e4.getAiSkill().getName());
+        System.out.println(e4.getAiSkill().getName());
+        System.out.println(e4.getAiSkill().getName());
+        System.out.println(e4.getAiSkill().getName());
+        System.out.println(e4.getAiSkill().getName());
+        System.out.println(e4.getAiSkill().getName());
+        
+        Party p = new Party(4);
+        Set s = new Set(3);
+        s.addEnemy(e0);
+        s.addEnemy(e1);
+        s.addEnemy(e2);
+        p.addMember(EntityLoader.loadPartyMember(0));
+        p.addMember(EntityLoader.loadPartyMember(1));
+        p.addMember(EntityLoader.loadPartyMember(2));
+        p.addMember(EntityLoader.loadPartyMember(3));
+        
+        p.damageMember(10, 0);
+        s.damageEnemy(10, 0);
+        for(int i=0;i<3;i++){
+            BattleAction b = s.getEnemy(i).getAiSkill();
+            BattleEntity e = s.getEnemy(i).getAiTarget(p, s, b);
+            System.out.printf("%s used %s on %s\n",s.getEnemy(i).getName(),b.getName(),e.getName());
+        }
+        
+        
     }
 }

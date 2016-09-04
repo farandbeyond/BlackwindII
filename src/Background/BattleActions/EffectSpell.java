@@ -41,8 +41,10 @@ public class EffectSpell extends Spell{
     public int getElement(){return Element.NEUTRAL;}
     public boolean targetsAllies(){
         if(effect.getClass()==Buff.class){
+            System.out.println("Effect is a buff");
             return true;
         }else{
+            System.out.println("Effect is NOT a buff");
             return false;        
         }
     }

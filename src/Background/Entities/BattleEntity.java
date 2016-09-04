@@ -171,6 +171,16 @@ public class BattleEntity {
             return false;
         return true;
     }
+    public double getElementModifier(int attackingElement){
+        return Element.handler(attackingElement, element);
+    }
+    public int getHpPercentile(){
+        int pc = getStat(HP).getStat()*100/getStat(HP).getMax();
+        return pc;
+    }
+    public int getMissingHpPercentile(){
+        return 100-getHpPercentile();
+    }
     //prints for testing
     public void printhpmp(){
         System.out.printf("%d/%d hp\n", stats[HP].getStat(),stats[HP].getMax());
@@ -324,5 +334,9 @@ public class BattleEntity {
         wilson.printhpmp();
         wilson.heal(10);
         wilson.printhpmp();
+        //wilson.heal(10);
+        
+        System.out.println(wilson.getMissingHpPercentile());
+        System.out.println(wilson.getHpPercentile());
     }
 }

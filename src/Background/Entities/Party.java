@@ -88,7 +88,7 @@ public class Party {
             throw new PartyNoMember(String.format("No party member at valid index %d",slot));
         return members[slot];
     }
-    
+    public PartyMember[] getMemberList(){return members;}
     public Stat getMembersStat(int member, int StatID){
         return getMember(member).getStat(StatID);
     }
