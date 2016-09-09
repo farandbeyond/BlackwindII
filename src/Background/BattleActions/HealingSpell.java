@@ -32,6 +32,15 @@ public class HealingSpell extends Spell{
     }
 
     @Override
+    public boolean canExecute(BattleEntity target) {
+        if(!target.isDead()&&!revives&&getCaster().canCast(this)&&target.isDamaged())
+            return true;
+        if(revives&&target.isDead()&&getCaster().canCast(this))
+            return true;
+        return false;
+    }
+    
+    @Override
     public String cast(BattleEntity target) {
         int heal = 0;
         rand.setSeed(System.currentTimeMillis());

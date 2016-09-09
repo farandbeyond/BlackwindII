@@ -20,7 +20,7 @@ public class MInventory extends SelectorMenu{
     Inventory inv;
     Item filter;
     public MInventory(Inventory inv, int x, int y, int width, int height, Color c) {
-        super(inv.getCurrentSize()<9?inv.getCurrentSize()-1:9, x, y, width, height, 60,40,40, c);
+        super(inv.getCurrentSize()<9?inv.getCurrentSize()-1:9-1, x, y, width, height, 60,40,40, c);
         filter = null;
         setMaxOffsetInv(inv.getItemList());
         this.inv = inv;

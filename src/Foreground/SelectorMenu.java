@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 public class SelectorMenu extends JPanel{
     int selectorPosition;
     int selectorMaxPos;
+    int selectorMinPos;
     int distFromTop;
     int distFromLeft;
     int distBetweenItems;
@@ -28,12 +29,28 @@ public class SelectorMenu extends JPanel{
     private int currOffset;
     private int maxOffset;
     
+    
     int myWidth, myHeight, myX, myY;
     Color color;
     
     public SelectorMenu(int maxPos, int x, int y, int width, int height, int distanceFromTop, int distanceFromLeft, int distanceBetweenItems, Color c){
         selectorPosition = 0;
         selectorMaxPos = maxPos;
+        selectorMinPos = 0;
+        currOffset = 0;
+        distFromTop = distanceFromTop;
+        distFromLeft = distanceFromLeft;
+        distBetweenItems = distanceBetweenItems;
+        myX = x;
+        myY = y;
+        myWidth = width;
+        myHeight = height;
+        color = c;
+    }
+    public SelectorMenu(int minPos, int maxPos, int x, int y, int width, int height, int distanceFromTop, int distanceFromLeft, int distanceBetweenItems, Color c){
+        selectorPosition = 0;
+        selectorMaxPos = maxPos;
+        selectorMinPos = minPos;
         currOffset = 0;
         distFromTop = distanceFromTop;
         distFromLeft = distanceFromLeft;
@@ -61,9 +78,9 @@ public class SelectorMenu extends JPanel{
     }
     public void confirmMenuPosition(){
         if(selectorPosition>selectorMaxPos){
-            selectorPosition = 0;
+            selectorPosition = selectorMinPos;
         }
-        if(selectorPosition<0){
+        if(selectorPosition<selectorMinPos){
             selectorPosition = selectorMaxPos;
         }
     }
@@ -72,11 +89,12 @@ public class SelectorMenu extends JPanel{
             currOffset++;
             selectorPosition--;
             System.out.println("Condition 1");
-        }else if(currOffset>0 && selectorPosition==2){
+        }else if(currOffset>selectorMinPos && selectorPosition==2){
             currOffset--;
             selectorPosition++;
             System.out.println("Condition 2");
-        }else if(selectorPosition<0){
+        }else if(selectorPosition<selectorMinPos){
+            
             currOffset = maxOffset;
             selectorPosition = selectorMaxPos;
             System.out.println("Condition 3");

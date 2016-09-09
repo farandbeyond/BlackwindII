@@ -22,6 +22,7 @@ public class Joystick implements KeyListener{
     }
     @Override
     public void keyTyped(KeyEvent ke) {
+        
     }
 
     @Override

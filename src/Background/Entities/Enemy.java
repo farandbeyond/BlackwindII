@@ -29,8 +29,8 @@ public class Enemy extends BattleEntity{
     }
 
     
-    public BattleAction getAiSkill() {
-        return ai.getAction();
+    public BattleAction getAiSkill(Set s, Party p) {
+        return ai.getAction(s,p);
     }
     public BattleEntity getAiTarget(Party p, Set s, BattleAction a){
         return ai.getTarget(a,s,p);

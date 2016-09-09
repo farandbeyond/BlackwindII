@@ -456,7 +456,7 @@ public class Menu extends HandlerMenu{
             if(getConfirmEvent()){
                 if(inventory.checkFilter(inventory.getSelectedItem())){
                     try{
-                        if(inventory.getInv().canAdd(party.getSelectedMember().getWeapon())){
+                        if(inventory.getInv().canAdd(party.getSelectedMember().getEquipment(equipment.getSelectorPosition()))){
                             inventory.getInv().add(party.getSelectedMember().unequip(equipment.getSelectorPosition()));
                             equipment.equip(inventory.getSelectedItem().getOne());
                             cancelEvent();

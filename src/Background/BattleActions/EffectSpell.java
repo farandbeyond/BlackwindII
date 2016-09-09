@@ -24,6 +24,14 @@ public class EffectSpell extends Spell{
         super(id,null,name,description,cost);
         this.effect=effect;
     }
+
+    @Override
+    public boolean canExecute(BattleEntity target) {
+        if(!target.isDead()&&getCaster().canCast(this))
+            return true;
+        return false;
+    }
+    
     @Override
     public String cast(BattleEntity target) {
         getCaster().useMp(getCost());

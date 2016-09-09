@@ -16,7 +16,7 @@ public abstract class HandlerMenu extends JPanel{
     boolean confirmEvent;
     boolean cancelEvent;
     public HandlerMenu(){
-        change = false;
+        change = true;
         confirmEvent = false;
         cancelEvent = false;
     }

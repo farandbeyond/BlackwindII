@@ -22,6 +22,7 @@ public abstract class BattleAction {
     public abstract int getCost();
     public abstract int getElement();
     public abstract boolean targetsAllies();
+    public abstract boolean canExecute(BattleEntity target);
     public BattleAction(int skillID,BattleEntity caster,String name, String description){
         this.skillID = skillID;
         this.name=name;

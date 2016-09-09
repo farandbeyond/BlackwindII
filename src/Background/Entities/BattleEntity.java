@@ -16,7 +16,7 @@ import java.util.Random;
  * @author Connor
  */
 public class BattleEntity {
-    public static int HP=0,MP=1,STR=2, DEX=3, VIT=4, INT=5,RES=6;
+    public final static int HP=0,MP=1,STR=2, DEX=3, VIT=4, INT=5,RES=6;
     public static String[] statNames = {"HP","MP","Strength","Dexterity","Vitality","Intelligence","Resistance"};
     public static Random rand = new Random();
     String name;
@@ -181,6 +181,13 @@ public class BattleEntity {
     public int getMissingHpPercentile(){
         return 100-getHpPercentile();
     }
+    public int getMpPercentile(){
+        int pc = getStat(MP).getStat()*100/getStat(MP).getMax();
+        return pc;
+    }
+    public int getMissingMpPercentile(){
+        return 100-getMpPercentile();
+    }
     //prints for testing
     public void printhpmp(){
         System.out.printf("%d/%d hp\n", stats[HP].getStat(),stats[HP].getMax());
@@ -335,8 +342,8 @@ public class BattleEntity {
         wilson.heal(10);
         wilson.printhpmp();
         //wilson.heal(10);
-        
-        System.out.println(wilson.getMissingHpPercentile());
+        wilson.printhpmp();
+        System.out.println(wilson.getMissingHpPercentile()+"%");
         System.out.println(wilson.getHpPercentile());
     }
 }

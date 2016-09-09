@@ -23,6 +23,12 @@ public class DeathAction extends BattleAction{
     }
 
     @Override
+    public boolean canExecute(BattleEntity target) {
+        return true;
+    }
+    
+
+    @Override
     public int getCost() {
         return 0;
     }

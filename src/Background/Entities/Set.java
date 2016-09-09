@@ -103,6 +103,12 @@ public class Set {
         }
         return i;
     }
+    public boolean anyoneIsDamaged(){
+        for(Enemy m:members)
+            if(m.isDamaged())
+                return true;
+        return false;
+    }
     
     public class SetFull extends RuntimeException{
         SetFull(String err){

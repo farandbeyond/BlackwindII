@@ -111,6 +111,12 @@ public class Party {
         }
         return i;
     }
+    public boolean anyoneIsDamaged(){
+        for(PartyMember m:members)
+            if(m.isDamaged())
+                return true;
+        return false;
+    }
     
     public class PartyFull extends RuntimeException{
         PartyFull(String err){

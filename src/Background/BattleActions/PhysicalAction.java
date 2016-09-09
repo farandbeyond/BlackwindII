@@ -36,6 +36,14 @@ public class PhysicalAction extends BattleAction{
         this.element=element;
         rand = new Random();
     }
+
+    @Override
+    public boolean canExecute(BattleEntity target) {
+        if(!target.isDead())
+            return true;
+        return false;
+    }
+    
     public String execute(BattleEntity target){
         rand.setSeed(System.currentTimeMillis());
         int damage = 0;

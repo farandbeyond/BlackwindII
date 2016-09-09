@@ -19,6 +19,10 @@ public abstract class Spell extends BattleAction{
     }
     public abstract String cast(BattleEntity target);
     public abstract boolean targetsAllies();
+
+    @Override
+    public abstract boolean canExecute(BattleEntity target);
+    
     @Override
     public String execute(BattleEntity target) {
         return cast(target);

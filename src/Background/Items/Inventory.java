@@ -71,7 +71,7 @@ public class Inventory {
     
     public boolean canAdd(Item i){
         if(i==null){
-            return false;
+            return true;
         }
         if(contains(i.getId())&&getItem(getLocationOf(i.getId())).canStack(i.getQuantity()))
             return true;

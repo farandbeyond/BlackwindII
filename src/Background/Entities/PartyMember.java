@@ -139,6 +139,7 @@ public class PartyMember extends BattleEntity{
             throw new EntityNullError(String.format("Armor in slot %d is null",slot));
         }        
     }
+    public Equipment getEquipment(int slot){return equipment[slot];}
     
     public static void main(String[] args){
         System.out.println("Test 01");

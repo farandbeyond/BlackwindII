@@ -52,6 +52,14 @@ public class DamageSpell extends Spell{
         target.damage(damage);
         return String.format("%s dealt %d damage to %s with %s", getCaster().getName(),damage, target.getName(), getName());
     }
+
+    @Override
+    public boolean canExecute(BattleEntity target) {
+        if(!target.isDead()&&getCaster().canCast(this))
+            return true;
+        return false;
+    }
+    
     //gets
     public int getBaseDamage(){return baseDamage;}
     public int getRollDamage(){return rollDamage;}

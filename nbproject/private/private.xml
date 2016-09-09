@@ -3,19 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Background/BattleActions/BattleActionLoader.java</file>
-            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Foreground/HandlerMenu.java</file>
-            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Background/BattleActions/Spell.java</file>
-            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Background/Entities/Enemy.java</file>
-            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Background/BattleActions/BattleAction.java</file>
             <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Foreground/Battle/Battle.java</file>
             <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Background/Items/Inventory.java</file>
-            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Foreground/EnemyAI.java</file>
-            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Background/Entities/Set.java</file>
+            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Foreground/Joystick.java</file>
             <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Background/Entities/BattleEntity.java</file>
-            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Background/BattleActions/EffectSpell.java</file>
+            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Foreground/SelectorMenu.java</file>
+            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Foreground/Menu/Menu.java</file>
             <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Background/Entities/PartyMember.java</file>
-            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Background/Entities/Party.java</file>
         </group>
     </open-files>
 </project-private>
