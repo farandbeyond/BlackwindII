@@ -6,6 +6,7 @@
 package Foreground.Battle;
 
 import Background.BattleActions.BattleActionLoader;
+import Background.Effects.Effect;
 import Background.Entities.BattleEntity;
 import Background.Entities.EntityLoader;
 import Background.Entities.Party;
@@ -18,6 +19,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -26,6 +31,41 @@ import javax.swing.JPanel;
  * @author Connor
  */
 public class Battle extends HandlerMenu{
+    public static int numberOfEffectImages = 14;
+    public static int numberOfBuffs = 7;
+    private static BufferedImage[] effectImages;
+    public static void startUp(){
+        effectImages = new BufferedImage[numberOfEffectImages];
+        System.out.println("Tile Startup Commenced");
+        try{
+            loadImage(BattleEntity.HP,"BuffArrowHP");
+            loadImage(BattleEntity.MP,"BuffArrowMP");
+            loadImage(BattleEntity.STR,"BuffArrowSTR");
+            loadImage(BattleEntity.DEX,"BuffArrowDEX");
+            loadImage(BattleEntity.VIT,"BuffArrowVIT");
+            loadImage(BattleEntity.INT,"BuffArrowINT");
+            loadImage(BattleEntity.RES,"BuffArrowRES");
+            
+            loadImage(BattleEntity.HP+numberOfBuffs,"DebuffArrowHP");
+            loadImage(BattleEntity.MP+numberOfBuffs,"DebuffArrowMP");
+            loadImage(BattleEntity.STR+numberOfBuffs,"DebuffArrowSTR");
+            loadImage(BattleEntity.DEX+numberOfBuffs,"DebuffArrowDEX");
+            loadImage(BattleEntity.VIT+numberOfBuffs,"DebuffArrowVIT");
+            loadImage(BattleEntity.INT+numberOfBuffs,"DebuffArrowINT");
+            loadImage(BattleEntity.RES+numberOfBuffs,"DebuffArrowRES");
+            System.out.println("Battle Images Finished Loading Sucessfully");
+        }catch(Exception e){
+            System.out.println("Error Ocurred");
+            e.printStackTrace();
+        }
+        
+    }
+    public static void loadImage(int id,String fileName) throws IOException{
+        effectImages[id] = ImageIO.read(new File(String.format("images/battle/%s.png",fileName)));
+        //System.out.println(String.format("images/tiles/%s.png, sucessfully loaded",fileName));
+    }
+    public static BufferedImage getBuffImage(int statID){return effectImages[statID];}
+    public static BufferedImage getDebuffImage(int statID){return effectImages[statID+numberOfBuffs];}
     private final static int boxWidth = 150;
     Party p;
     Set s;
@@ -43,7 +83,7 @@ public class Battle extends HandlerMenu{
         partyBoxes = new EntityBox[4];
         enemyBoxes = new EntityBox[3];
         m = new Menu();
-        b = new DetailedEntityBox(p.getMember(0),boxWidth+1,480-200,300,200);
+        b = new DetailedEntityBox(p.getMember(0),boxWidth+1,480-200,318,199);
         for(int i=0;i<4;i++){
             try{
                 partyBoxes[i]=new EntityBox(p.getMember(i),0,280+50*i,boxWidth,50);
@@ -60,6 +100,10 @@ public class Battle extends HandlerMenu{
         }
     }
 
+    public void loop(){
+        while(true)
+            repaint();
+    }
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -92,6 +136,8 @@ public class Battle extends HandlerMenu{
         }
         
     }
+    
+    
     @Override
     public void upEvent() {
     }
@@ -101,7 +147,6 @@ public class Battle extends HandlerMenu{
     @Override
     public void rightEvent() {
     }
-
     @Override
     public void leftEvent() {
     }
@@ -117,11 +162,17 @@ public class Battle extends HandlerMenu{
         //set entitybox to static for this tester to work
         //EntityBox james = new EntityBox(EntityLoader.loadPartyMember(0),0,0,120,150);
         // frame.add(james);
+        Battle.startUp();
         Party p = new Party(4);
         p.addMember(EntityLoader.loadPartyMember(0));
         p.addMember(EntityLoader.loadPartyMember(1));
         p.getMember(0).equip(Items.Load(Items.MAGICCANE, 1), 0);
-        p.getMember(0).damage(11);
+        p.getMember(0).addSkill(BattleActionLoader.loadAction(BattleActionLoader.FRAILTY));
+        p.getMember(0).getSkill(0).execute(p.getMember(0));
+        //p.restAllMembers();
+        //p.getMember(0).getSkill(0).execute(p.getMember(0));
+        //p.restAllMembers();
+        //p.getMember(0).getSkill(0).execute(p.getMember(0));
         p.getMember(0).addSkill(BattleActionLoader.loadAction(BattleActionLoader.FIRE));
         p.getMember(0).addSkill(BattleActionLoader.loadAction(BattleActionLoader.BRAVERY));
         p.getMember(0).addSkill(BattleActionLoader.loadAction(BattleActionLoader.CURE));
@@ -151,7 +202,7 @@ public class Battle extends HandlerMenu{
         //b.setPreferredSize(new Dimension(640,480));
         //frame.add(b);
         //frame.pack();
-        //b.loop();
+        b.loop();
         
     }
     

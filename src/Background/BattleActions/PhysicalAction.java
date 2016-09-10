@@ -19,7 +19,7 @@ public class PhysicalAction extends BattleAction{
     private int damageStat, resistStat;
     
     public PhysicalAction(int id,BattleEntity caster,String name, String description,int baseDamage, int rollDamage, int damageStat, int resistStat, int element){
-        super(id,caster,name,description);
+        super(id,caster,name,description,element);
         this.damageStat=damageStat;
         this.resistStat=resistStat;
         this.baseDamage=baseDamage;
@@ -28,7 +28,7 @@ public class PhysicalAction extends BattleAction{
         rand = new Random();
     }
     public PhysicalAction(int id,String name, String description,int baseDamage, int rollDamage, int damageStat, int resistStat, int element){
-        super(id,null,name,description);
+        super(id,null,name,description,element);
         this.damageStat=damageStat;
         this.resistStat=resistStat;
         this.baseDamage=baseDamage;
@@ -48,13 +48,16 @@ public class PhysicalAction extends BattleAction{
         rand.setSeed(System.currentTimeMillis());
         int damage = 0;
         //System.out.println("Starting Damage:"+damage);
-        if(getCaster().getClass()==PartyMember.class){
-            if(((PartyMember)getCaster()).getWeapon()!=null){
-                damage+=((PartyMember)getCaster()).getWeapon().getDamage();
-            }
-        }
-          
-        
+        damage = getWeaponDamage(damage);
+        damage = getInflictedDamage(target,damage);
+        damage = elementHandler(target, damage);
+        //System.out.println("Element Damage Multiplier:"+damage);
+        target.damage(damage);
+        return String.format("%s dealt %d damage to %s with %s", getCaster().getName(),damage, target.getName(), getName());
+    }
+
+    @Override
+    public int getInflictedDamage(BattleEntity target, int damage) {
         //System.out.println("Weapon Damage:"+damage);
         damage+=baseDamage;
         //System.out.println("Skill Base Damage:"+damage);
@@ -64,17 +67,9 @@ public class PhysicalAction extends BattleAction{
         //System.out.println("Casting Stat Damage:"+damage);
         damage-=target.getStat(resistStat).getStat()/2;
         //System.out.println("Enemy Resistance Reduction:"+damage);
-        if(Element.handler(element, target.getElement())<0)
-            damage*=Element.handler(element, target.getElement());
-        else{
-            damage*=Element.handler(element, target.getElement());
-            if(damage<=0)
-                damage = 1;
-        }
-        //System.out.println("Element Damage Multiplier:"+damage);
-        target.damage(damage);
-        return String.format("%s dealt %d damage to %s with %s", getCaster().getName(),damage, target.getName(), getName());
+        return damage;
     }
+    
     //gets
     public int getCost(){return 0;}
     public int getBaseDamage(){return baseDamage;}

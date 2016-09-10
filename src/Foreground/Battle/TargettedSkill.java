@@ -25,4 +25,7 @@ public class TargettedSkill {
         else
             return String.format("%s didn't act",b.getCaster().getName());
     }
+    public boolean isCastBy(BattleEntity e){
+        return b.getCaster()==e;
+    }
 }

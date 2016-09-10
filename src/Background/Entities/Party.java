@@ -56,8 +56,15 @@ public class Party {
         getMember(slot).gainExp(exp);
     }
     public void restAllMembers(){
-        for(PartyMember p:members)
-            p.rest();
+        //for(PartyMember p:members)
+        //    p.rest();
+        int member=0;
+        
+        while(member<members.length){
+            if(members[member]==null)
+                break;
+            members[member].rest();
+        }
     }
     public void useMemberMp(int mp, int slot){
         getMember(slot).useMp(mp);

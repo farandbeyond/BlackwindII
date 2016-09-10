@@ -6,6 +6,8 @@
 package Background.BattleActions;
 
 import Background.Entities.BattleEntity;
+import Background.Entities.Element;
+import Background.Items.DamageItem;
 import Background.Items.HealingItem;
 import Background.Items.Item;
 
@@ -17,7 +19,7 @@ public class UseItem extends BattleAction{
 
     Item item;
     public UseItem(int id,BattleEntity caster, Item i){
-        super(id,caster,i.getName(),"Uses the item");
+        super(id,caster,i.getName(),"Uses the item",Element.NEUTRAL);
         item = i;
     }
 
@@ -30,6 +32,15 @@ public class UseItem extends BattleAction{
                 return true;
         return false;
     }
+
+    @Override
+    public int getInflictedDamage(BattleEntity target, int damage) {
+        if(item.getClass()==DamageItem.class)
+            return ((DamageItem)item).getDamage();
+        else
+            return 0;
+    }
+    
     
     @Override
     public String execute(BattleEntity target) {return item.use(target);}

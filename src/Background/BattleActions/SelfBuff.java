@@ -20,8 +20,8 @@ public class SelfBuff extends EffectSpell{
      public SelfBuff(int id,String name, String description, int cost, Effect effect) {
         super(id,null, name, description, cost, effect);
     }
-        public String cast(BattleEntity target) {
-        getCaster().useMp(getCost());
+    public String cast(BattleEntity target) {
+        useMp();
         getCaster().giveEffect(getEffect());
         return String.format("%s bolstered their own %s", getCaster().getName(),getCaster().getStat(((Buff)getEffect()).getStat()).getShortName());
     }

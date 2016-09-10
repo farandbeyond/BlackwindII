@@ -17,11 +17,11 @@ public class EffectSpell extends Spell{
     private Effect effect;
     
     public EffectSpell(int id,BattleEntity caster,String name, String description,int cost, Effect effect){
-        super(id,caster,name,description,cost);
+        super(id,caster,name,description,cost,Element.NEUTRAL);
         this.effect=effect;
     }
     public EffectSpell(int id,String name, String description,int cost, Effect effect){
-        super(id,null,name,description,cost);
+        super(id,null,name,description,cost,Element.NEUTRAL);
         this.effect=effect;
     }
 
@@ -34,7 +34,7 @@ public class EffectSpell extends Spell{
     
     @Override
     public String cast(BattleEntity target) {
-        getCaster().useMp(getCost());
+        useMp();
         if(effect.getClass()==Buff.class){
             target.giveEffect(Effect.loadStatAltering(Effect.BUFF,effect.getName(),getName(),effect.getDuration(),((Buff)effect).getStat(),((Buff)effect).getIncrease()));
             return String.format("%s bolstered %s's %s",getCaster().getName(),target.getName(),getCaster().getStat(((Buff)effect).getStat()).getShortName());
@@ -44,6 +44,12 @@ public class EffectSpell extends Spell{
         }
         return "something went wrong";
     }
+
+    @Override
+    public int getInflictedDamage(BattleEntity target, int damage) {
+        return 0; // effect spells deal no damage
+    }
+    
     //gets
     public Effect getEffect(){return effect;}
     public int getElement(){return Element.NEUTRAL;}

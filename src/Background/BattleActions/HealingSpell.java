@@ -17,14 +17,14 @@ public class HealingSpell extends Spell{
     private final boolean revives;
     //Random rand;
     public HealingSpell(int id,BattleEntity caster,String name, String description, int baseHeal, int rollHeal,boolean revives, int cost){
-        super(id,caster,name,description,cost);
+        super(id,caster,name,description,cost,Element.NEUTRAL);
         this.baseHeal=baseHeal;
         this.rollHeal=rollHeal;
         this.revives=revives;
         //rand = new Random();
     }
     public HealingSpell(int id,String name, String description,int baseHeal, int rollHeal,boolean revives, int cost){
-        super(id,null,name,description,cost);
+        super(id,null,name,description,cost,Element.NEUTRAL);
         this.baseHeal=baseHeal;
         this.rollHeal=rollHeal;
         this.revives=revives;
@@ -44,9 +44,8 @@ public class HealingSpell extends Spell{
     public String cast(BattleEntity target) {
         int heal = 0;
         rand.setSeed(System.currentTimeMillis());
-        getCaster().useMp(getCost());
-        heal+=getCaster().getStat(BattleEntity.INT).getStat()/3;
-        heal+=baseHeal+rand.nextInt(rollHeal);
+        useMp();
+        heal = getInflictedDamage(target,heal);
         if(revives){
             target.raise(heal);
             return String.format("%s raised %s for %d with %s", getCaster().getName(),target.getName(),heal,getName());
@@ -56,11 +55,19 @@ public class HealingSpell extends Spell{
             return String.format("%s healed %s for %d with %s", getCaster().getName(),target.getName(),heal,getName());
         }
     }
+
+    @Override
+    public int getInflictedDamage(BattleEntity target, int heal) {
+        heal+=getCaster().getStat(BattleEntity.INT).getStat()/3;
+        heal+=baseHeal+rand.nextInt(rollHeal);
+        return heal;
+    }
+    
+    
     //gets
     public int getBaseHeal(){return baseHeal;}
     public int getRollHeal(){return rollHeal;}
     public int getMaxHeal(){return baseHeal+rollHeal;}
-    public int getElement(){return Element.NEUTRAL;}
     public boolean getRevives(){return revives;}
     public boolean targetsAllies(){return true;}
 }

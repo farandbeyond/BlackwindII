@@ -144,6 +144,7 @@ public class BattleEntity {
     public ArrayList<BattleAction> getSkillList(){
         return skills;
     }
+    public ArrayList<Effect> getEffectList(){return effects;}
     public Effect getEffect(int index){
         try{
             return effects.get(index);
