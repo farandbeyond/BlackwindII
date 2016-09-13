@@ -31,8 +31,8 @@ public class Tile{
         System.out.println("Tile Startup Commenced");
         try{
             loadTile(0,"Void",false,"void");
-            loadTile(1,"Floor",true,"floor2");
-            loadTile(2,"Wall",false,"wall2");
+            loadTile(1,"Ground",true,"floor2");
+            loadTile(2,"Forest",false,"wall2");
             loadTile(3,"Path",true,"testPath");
             loadTile(4,"HouseDoor",true,"YellowHouseDoor");
             loadTile(5,"HouseWall",false,"YellowHouseBlankWall");
@@ -55,6 +55,8 @@ public class Tile{
         //System.out.println(String.format("images/tiles/%s.png, sucessfully loaded",fileName));
     }
     public static BufferedImage[] getImagesList(){return dictTileImages;}
+    public static BufferedImage getImage(int id){return dictTileImages[id];}
+    public static int getNumberOfTiles(){return numberOfTiles;}
     //instance controllers: Constructor, local id, etc
     private int id;
     public Tile(int id){
@@ -69,6 +71,7 @@ public class Tile{
     public boolean getWalkable(){return dictTileWalkable[id];}
     public int getID(){return id;}
     public String getDetails(){return String.format("%d", id);}
+    
     //public void activate(Blackwind b){};
     
     public static void main(String[] args){
