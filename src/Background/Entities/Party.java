@@ -124,6 +124,14 @@ public class Party {
                 return true;
         return false;
     }
+    public boolean someoneIsAlive(){
+        for(int i=0;i<members.length;i++){
+            if(members[i]!=null)
+                if(!members[i].isDead())
+                    return true;
+        }
+        return false;
+    }
     
     public class PartyFull extends RuntimeException{
         PartyFull(String err){

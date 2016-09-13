@@ -64,7 +64,6 @@ public class Menu extends HandlerMenu{
         options.setSelectorVisible();
         while(!getCancelEvent()){
             resetEvents();
-            Thread.sleep(10);
             repaint();
             if(getConfirmEvent()){
                 System.out.println("Confirm");
@@ -89,7 +88,7 @@ public class Menu extends HandlerMenu{
         optionsLoaded = false;
         while(!getCancelEvent()){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
             if(getConfirmEvent()){
                 //System.out.println(inventory.getSelectedItem().getName());
@@ -112,7 +111,7 @@ public class Menu extends HandlerMenu{
         options.setSelectorVisible();
         while(!getCancelEvent()){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
             if(getConfirmEvent()){
                 switch(options.getSelectorPosition()){
@@ -153,10 +152,10 @@ public class Menu extends HandlerMenu{
             //System.out.println(party.getSelectorPosition());
             setAssistText(String.format("Use %s x%d on whom?", inventory.getSelectedItem().getName(),inventory.getSelectedItem().getQuantity()));
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
             if(getConfirmEvent()){
-                if(!inventory.getSelectedItem().canUse(party.getSelectedMember())){
+                if(!inventory.getSelectedItem().canUseOn(party.getSelectedMember())){
                     setAssistText(String.format("%s x%d cant be used on %s", inventory.getSelectedItem().getName(),inventory.getSelectedItem().getQuantity(),party.getSelectedMember().getName()));
                     Thread.sleep(50);
                 }else{
@@ -180,7 +179,7 @@ public class Menu extends HandlerMenu{
         int save = inventory.getSelectorPosition()+inventory.getCurrOffset();
         while(!getCancelEvent()){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
             if(getConfirmEvent()){
                 inventory.getInv().swap(save, inventory.getSelectorPosition()+inventory.getCurrOffset());
@@ -200,7 +199,7 @@ public class Menu extends HandlerMenu{
         resetEvents();
         while(!getCancelEvent()&&!getConfirmEvent()){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
         }
         resetEvents();
@@ -213,7 +212,7 @@ public class Menu extends HandlerMenu{
         setAssistText(String.format("Drop %s x%d?",inventory.getSelectedItem().getName(),inventory.getSelectedItem().getQuantity()));
         while(!getCancelEvent()){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
             if(getConfirmEvent()){
                 setAssistText(String.format("Dropped %s x%d",inventory.getSelectedItem().getName(),inventory.getSelectedItem().getQuantity()));
@@ -234,7 +233,7 @@ public class Menu extends HandlerMenu{
         party.setSelectorVisible();
         while(!getCancelEvent()){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
             if(getConfirmEvent()){
                 statusViewLoop();
@@ -253,7 +252,7 @@ public class Menu extends HandlerMenu{
         options.updateSelectorPosition(0);
         while(!getCancelEvent() && !getConfirmEvent()){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
         }
         options.updateSelectorPosition(1);
@@ -268,7 +267,7 @@ public class Menu extends HandlerMenu{
         party.setSelectorVisible();
         while(!getCancelEvent()){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
             if(getConfirmEvent()){
                 viewSkillsMenu();
@@ -287,7 +286,7 @@ public class Menu extends HandlerMenu{
         loadMenu(skills);
         while(!getCancelEvent()){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
             if(getConfirmEvent()){
                 skillOptionsLoop();
@@ -306,7 +305,7 @@ public class Menu extends HandlerMenu{
         options.updateSelectorPosition(0);
         while(!getCancelEvent()){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
             if(getConfirmEvent()){
                 switch(options.getSelectorPosition()){
@@ -331,7 +330,7 @@ public class Menu extends HandlerMenu{
         optionsLoaded=false;
         while(!getCancelEvent()){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
             if(getConfirmEvent()){
                 setAssistText(skills.getSelectedAction().execute(party.getSelectedMember()));
@@ -350,7 +349,7 @@ public class Menu extends HandlerMenu{
         changed();
         while(!getCancelEvent()&&!getConfirmEvent()){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
         }
         options.loadSpellsMenuOptions();
@@ -365,7 +364,7 @@ public class Menu extends HandlerMenu{
         setAssistText("What will swap with "+skills.getSelectedAction().getName()+"?");
         while(!getCancelEvent()){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
             if(getConfirmEvent()){
                 BattleAction b = skills.getSkillsList().get(swapPosition);
@@ -384,7 +383,7 @@ public class Menu extends HandlerMenu{
         party.setSelectorVisible();
         while(!getCancelEvent()){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
             if(getConfirmEvent()){
                 equipment.updateEquipper(party.getSelectedMember());
@@ -403,7 +402,7 @@ public class Menu extends HandlerMenu{
         options.updateSelectorPosition(0);
         while(!getCancelEvent()){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
             if(getConfirmEvent()){
                 equipmentOptionsLoop();
@@ -420,7 +419,7 @@ public class Menu extends HandlerMenu{
         optionsLoaded=true;
         while(!getCancelEvent()){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
             if(getConfirmEvent()){
                 switch(options.getSelectorPosition()){
@@ -451,7 +450,7 @@ public class Menu extends HandlerMenu{
         optionsLoaded = false;
         while(!getCancelEvent()){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
             if(getConfirmEvent()){
                 if(inventory.checkFilter(inventory.getSelectedItem())){
@@ -492,7 +491,7 @@ public class Menu extends HandlerMenu{
         resetEvents();
         while(!getCancelEvent() && !getConfirmEvent()){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
         }
         loadMenu(equipment);
@@ -505,14 +504,14 @@ public class Menu extends HandlerMenu{
         assistText = "Who will swap?";
         while(!getCancelEvent()&&!ret){
             resetEvents();
-            Thread.sleep(10);
+            
             repaint();
             if(getConfirmEvent()){
                 int index1 = loadedMenu.getSelectorPosition();
                 assistText = "Who will they swap with?";
                 while(!getCancelEvent()&&!ret){
                     resetEvents();
-                    Thread.sleep(10);
+                    
                     repaint();
                     if(getConfirmEvent()){
                         assistText = "Swapped";
@@ -528,14 +527,6 @@ public class Menu extends HandlerMenu{
     
     public void setAssistText(String text){
         assistText = text;
-    }
-    
-    public void repaint(){
-        if(change()){
-            painted();
-            //System.out.println("Painting");
-            super.repaint();
-        }
     }
     public void paintComponents(Graphics g){
         paint(g);

@@ -24,7 +24,7 @@ public class HealingItem extends Item{
         this.revives = revives;
     }
     @Override
-    public boolean canUse(BattleEntity target){
+    public boolean canUseOn(BattleEntity target){
         if(revives){
             if(target.isDead())
                 return true;
@@ -40,6 +40,7 @@ public class HealingItem extends Item{
                 return false;
         }
     }
+    public boolean canUse(){return true;}
     @Override
     public String use(BattleEntity target) {
         if(getQuantity()==0)

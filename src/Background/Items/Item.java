@@ -29,7 +29,8 @@ public abstract class Item {
         this.description = description;
     }
     public abstract String use(BattleEntity target);
-    public abstract boolean canUse(BattleEntity target);
+    public abstract boolean canUseOn(BattleEntity target);
+    public abstract boolean canUse();
     //quantity adjusters/checkers
     public void reduceQuantity(int i){
         quantity-=i;

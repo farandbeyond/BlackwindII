@@ -22,11 +22,12 @@ public class DamageItem extends Item{
         this.element = element;
     }
     @Override
-    public boolean canUse(BattleEntity target){
+    public boolean canUseOn(BattleEntity target){
         if(!target.isDead())
             return true;
         return false;
     }
+    public boolean canUse(){return true;}
     @Override
     public String use(BattleEntity target) {
         if(getQuantity()==0)

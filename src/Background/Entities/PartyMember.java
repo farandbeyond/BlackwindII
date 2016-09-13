@@ -96,13 +96,14 @@ public class PartyMember extends BattleEntity{
     }
     
     //level controlling
-    public void gainExp(int xpGained){
+    public String gainExp(int xpGained){
         totalExp+=xpGained;
         if(totalExp>=expToLevel){
-            System.out.println("Level Up");
             levelUp();
             findXpToLevel();
+            return getName()+" levelled up to level "+level;
         }
+        return getName()+" gained "+xpGained+" exp";
     }
     public void levelUp(){
         try{

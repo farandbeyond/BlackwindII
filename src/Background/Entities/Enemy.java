@@ -28,6 +28,14 @@ public class Enemy extends BattleEntity{
         this.ai = ai;
     }
 
+    public int getXpGiven() {
+        return xpGiven;
+    }
+
+    public int getGoldGiven() {
+        return goldGiven;
+    }
+
     
     public BattleAction getAiSkill(Set s, Party p) {
         return ai.getAction(s,p);

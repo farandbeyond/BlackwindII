@@ -90,9 +90,14 @@ public class EntityBox extends JPanel{
         else
             currentColor = Color.cyan;
     }
-    public void updateEntity(BattleEntity b){this.b = b;}
+    public void updateEntity(BattleEntity b){
+        this.hpBar = new StatBar(b,true,BattleEntity.HP,hpX,hpY,myWidth/2);
+        this.mpBar = new StatBar(b,true,BattleEntity.MP,mpX,mpY,myWidth/2);
+        this.b = b;
+    }
     
     public void paint(Graphics g) {
+        updateColor();
         g.setColor(currentColor);
         g.fillRect(myX, myY, myWidth, myHeight);
         g.setColor(Color.black);
@@ -104,6 +109,15 @@ public class EntityBox extends JPanel{
         if(b!=null)
             g.drawString(b.getName(), myX+2, myY+12);
     }
+    
+    public boolean getActing(){return acting;}
+    public boolean getTargeted(){return targeted;}
+    
+    public void target(){targeted = true;}
+    public void acting(){acting = true;}
+    
+    public void setTargeted(boolean targeted){this.targeted = targeted;}
+    public void setActing(boolean acting){this.acting = acting;}
     
     public static void main(String[] args){
         

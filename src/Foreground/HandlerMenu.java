@@ -30,6 +30,19 @@ public abstract class HandlerMenu extends JPanel{
     public boolean getConfirmEvent(){return confirmEvent;}
     public boolean getCancelEvent(){return cancelEvent;}
     public void resetEvents(){confirmEvent = false;cancelEvent = false;}
+    @Override
+    public void repaint(){
+        //This will be removed once Blackwind comes into play. until then, enjoy the Thread.sleep(10);
+        try{
+            Thread.sleep(10);
+        }catch(InterruptedException e){
+            
+        }
+        if(change){
+            super.repaint();
+            painted();
+        }
+    }
     public void changed(){change = true;}
     public void painted(){change = false;}
 }

@@ -109,6 +109,14 @@ public class Set {
                 return true;
         return false;
     }
+    public boolean someoneIsAlive(){
+        for(int i=0;i<members.length;i++){
+            if(members[i]!=null)
+                if(!members[i].isDead())
+                    return true;
+        }
+        return false;
+    }
     
     public class SetFull extends RuntimeException{
         SetFull(String err){

@@ -12,15 +12,16 @@ import Background.Entities.BattleEntity;
  *
  * @author Connor
  */
-public class TargettedSkill {
+public class TargetedSkill {
     BattleAction b;
     BattleEntity target;
-    public TargettedSkill(BattleAction action, BattleEntity t){
+    public TargetedSkill(){}
+    public TargetedSkill(BattleAction action, BattleEntity t){
         target = t;
         b = action;
     }
     public String execute(){
-        if(b.canExecute(target))
+        if(b.canExecuteOn(target))
             return b.execute(target);
         else
             return String.format("%s didn't act",b.getCaster().getName());
@@ -28,4 +29,15 @@ public class TargettedSkill {
     public boolean isCastBy(BattleEntity e){
         return b.getCaster()==e;
     }
+    public int getCasterDex(){return b.getCasterStat(BattleEntity.DEX);}
+    public BattleAction getSkill(){return b;}
+    public void setAction(BattleAction b) {
+        this.b = b;
+    }
+
+    public void setTarget(BattleEntity target) {
+        this.target = target;
+    }
+    public BattleEntity getCaster(){return b.getCaster();}
+    
 }

@@ -44,16 +44,22 @@ public class BattleActionLoader {
         return null;
     }
     
-    public static BattleAction loadAttack(BattleEntity caster){
-        return new PhysicalAction(0,caster,"Attack","The basic attack action everyone has",1,3,BattleEntity.STR,BattleEntity.VIT,Element.NEUTRAL);
+    public static BattleAction loadAttack(PartyMember caster){
+        int element;
+        try{
+            element = caster.getWeapon().getElement();
+        }catch(BattleEntity.EntityNullError e){
+            element = Element.NEUTRAL;
+        }
+        return new PhysicalAction(0,caster,"Attack","The basic attack action everyone has",1,3,BattleEntity.STR,BattleEntity.VIT,element);
     }
     public static BattleAction noAction(BattleEntity caster){
-        return new DeathAction(0,caster,"Dead","Caster was dead at round start");
+        return new DeathAction(caster);
     }
     public static BattleAction loadAttack(BattleEntity caster, int newBase, int newRoll){
         return new PhysicalAction(ATTACK,caster,"Attack","The basic attack action everyone has",newBase,newRoll,BattleEntity.STR,BattleEntity.VIT,Element.NEUTRAL);
     }
     public static BattleAction loadItemAction(BattleEntity caster, Item i){
-        return new UseItem(0,caster,i);
+        return new UseItem(caster,i);
     }
 }

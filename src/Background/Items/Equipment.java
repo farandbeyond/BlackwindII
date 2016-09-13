@@ -17,7 +17,7 @@ public abstract class Equipment extends Item{
         super(id, name, description, quantity, maxQuantity, shopValue);
     }
     @Override
-    public abstract boolean canUse(BattleEntity target);
+    public abstract boolean canUseOn(BattleEntity target);
     @Override
     public abstract String use(BattleEntity target);
     public abstract void equip(BattleEntity target);

@@ -26,7 +26,7 @@ public class EffectSpell extends Spell{
     }
 
     @Override
-    public boolean canExecute(BattleEntity target) {
+    public boolean canExecuteOn(BattleEntity target) {
         if(!target.isDead()&&getCaster().canCast(this))
             return true;
         return false;

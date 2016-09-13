@@ -4,11 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Foreground/Battle/Battle.java</file>
-            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Background/Items/Inventory.java</file>
-            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Foreground/Joystick.java</file>
-            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Background/Entities/BattleEntity.java</file>
-            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Foreground/SelectorMenu.java</file>
-            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Foreground/Menu/Menu.java</file>
+            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Foreground/EnemyAI.java</file>
+            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Foreground/Battle/TargetedSkill.java</file>
+            <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Background/Entities/Enemy.java</file>
             <file>file:/C:/Users/Connor/Documents/NetBeansProjects/BlackwindII/src/Background/Entities/PartyMember.java</file>
         </group>
     </open-files>

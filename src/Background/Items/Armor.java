@@ -22,9 +22,10 @@ public class Armor extends Equipment{
         this.secondaryValue=secondaryIncrease;
     }
     @Override
-    public boolean canUse(BattleEntity target){
+    public boolean canUseOn(BattleEntity target){
         return false;
     }
+    public boolean canUse(){return false;}
     @Override
     public void equip(BattleEntity target) {
         this.setEquipper(target);

@@ -25,7 +25,10 @@ public abstract class BattleAction {
     public abstract int getCost();
     public int getElement(){return element;}
     public abstract boolean targetsAllies();
-    public abstract boolean canExecute(BattleEntity target);
+    public abstract boolean canExecuteOn(BattleEntity target);
+    public boolean canExecute(){
+        return caster.canCast(this);
+    }
     
     public abstract int getInflictedDamage(BattleEntity target,int damage);
     

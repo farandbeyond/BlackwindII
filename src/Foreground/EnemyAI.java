@@ -53,6 +53,8 @@ public class EnemyAI {
                 case BUFFFOCUS:
                     if(e.getClass()==EffectSpell.class)
                         setWeight(actionsClone,e,10);
+                    if(e.getClass()==SelfBuff.class)
+                        setWeight(actionsClone,e,10);
                     break;
                 case SPELLFOCUS:
                     if(e.getClass()==DamageSpell.class)
@@ -107,7 +109,7 @@ public class EnemyAI {
                     //System.out.println();
                     //System.out.printf("%s: %d/%d\n", en.getName(),en.getStat(BattleEntity.HP).getStat(),en.getStat(BattleEntity.HP).getMax());
                     for(int i=0;i<1+(en.getMissingHpPercentile()/20)*en.getElementModifier(b.getElement());i++){
-                        System.out.println(en.getName()+" added "+(i+1)+" times.");
+                        //System.out.println(en.getName()+" added "+(i+1)+" times.");
                         if(!en.isDead())
                             possibleTargets.add(en);
                     }
@@ -118,8 +120,8 @@ public class EnemyAI {
                         possibleTargets.add(en);
             }
         }
-        for(BattleEntity en:possibleTargets)
-            System.out.println(en.getName());
+        //for(BattleEntity en:possibleTargets)
+        //    System.out.println(en.getName());
         return possibleTargets.get(rand.nextInt(possibleTargets.size()));
     }
     

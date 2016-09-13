@@ -86,7 +86,7 @@ public class BattleEntity {
         regainMp(stats[MP].getMax());
     }
     //mp altering
-    public boolean canCast(Spell s){
+    public boolean canCast(BattleAction s){
         if(s.getCost()<=stats[MP].getStat())
             return true;
         return false;

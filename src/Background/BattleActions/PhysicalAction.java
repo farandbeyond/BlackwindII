@@ -38,7 +38,7 @@ public class PhysicalAction extends BattleAction{
     }
 
     @Override
-    public boolean canExecute(BattleEntity target) {
+    public boolean canExecuteOn(BattleEntity target) {
         if(!target.isDead())
             return true;
         return false;

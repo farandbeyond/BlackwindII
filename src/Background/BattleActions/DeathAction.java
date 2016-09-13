@@ -14,8 +14,8 @@ import Background.Entities.Element;
  */
 public class DeathAction extends BattleAction{
 
-    public DeathAction(int id,BattleEntity caster, String name, String description) {
-        super(id,caster, name, description,Element.NEUTRAL);
+    public DeathAction(BattleEntity caster) {
+        super(0,caster, "Death", "The action a dead unit takes",Element.NEUTRAL);
     }
 
     @Override
@@ -24,8 +24,8 @@ public class DeathAction extends BattleAction{
     }
 
     @Override
-    public boolean canExecute(BattleEntity target) {
-        return true;
+    public boolean canExecuteOn(BattleEntity target) {
+        return !getCaster().isDead();
     }
 
     @Override

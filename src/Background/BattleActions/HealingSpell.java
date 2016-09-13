@@ -32,7 +32,7 @@ public class HealingSpell extends Spell{
     }
 
     @Override
-    public boolean canExecute(BattleEntity target) {
+    public boolean canExecuteOn(BattleEntity target) {
         if(!target.isDead()&&!revives&&getCaster().canCast(this)&&target.isDamaged())
             return true;
         if(revives&&target.isDead()&&getCaster().canCast(this))

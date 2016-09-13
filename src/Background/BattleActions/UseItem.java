@@ -18,13 +18,13 @@ import Background.Items.Item;
 public class UseItem extends BattleAction{
 
     Item item;
-    public UseItem(int id,BattleEntity caster, Item i){
-        super(id,caster,i.getName(),"Uses the item",Element.NEUTRAL);
+    public UseItem(BattleEntity caster, Item i){
+        super(0,caster,i.getName(),"Uses the item",Element.NEUTRAL);
         item = i;
     }
 
     @Override
-    public boolean canExecute(BattleEntity target) {
+    public boolean canExecuteOn(BattleEntity target) {
         if(item.getQuantity()>0&&!target.isDead())
             return true;
         if(item.getClass()==HealingItem.class)
