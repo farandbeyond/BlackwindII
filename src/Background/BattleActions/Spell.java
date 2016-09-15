@@ -17,9 +17,10 @@ public abstract class Spell extends BattleAction{
         super(id,e,name, description,element);
         this.cost=cost;
     }
+    //overridden by its subclasses, cast is the "execute" funtion of spells. there is no essential difference at this moment, except thematically.
     public abstract String cast(BattleEntity target);
     public abstract boolean targetsAllies();
-
+    
     @Override
     public abstract boolean canExecuteOn(BattleEntity target);
     

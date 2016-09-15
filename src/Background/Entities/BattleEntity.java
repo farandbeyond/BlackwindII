@@ -65,6 +65,7 @@ public class BattleEntity {
         skills = new ArrayList<>();
     }
     //hp altering
+    //reduces the hp stat by the inputted amount. does not allow the hp stat to fall below 0
     public void damage(int damage){
         stats[HP].damage(damage);
         if(stats[HP].getStat()<=0){
@@ -72,39 +73,51 @@ public class BattleEntity {
             stats[HP].setZero();
         }
     }
+    //inreases the hp stat, up to its max, unless dead. if dead, no heal will happen
     public void heal(int heal){
         if(!isDead){
             stats[HP].heal(heal);
         }
     }
+    //removes the isDead status and calls the heal function with the healValue input
     public void raise(int heal){
         isDead = false;
         heal(heal);
     }
+    //restores HP and MP to full.
     public void rest(){
         raise(stats[HP].getMax());
         regainMp(stats[MP].getMax());
     }
+    
     //mp altering
+    //checks and returns if the input skill's cost is below current mp.
     public boolean canCast(BattleAction s){
         if(s.getCost()<=stats[MP].getStat())
             return true;
         return false;
     }
+    //reduces the MP stat by the input amount, down to 0
     public void useMp(int mpuse){
         stats[MP].damage(mpuse);
     }
+    //increases the MP stat by the input amount, up to max MP
     public void regainMp(int mpHeal){
         stats[MP].heal(mpHeal);
     }
+    
     //stat altering
+    //calls the Stat class's buff(int) function on specified stat
     public void increaseStat(int statID, int increase){
         stats[statID].buff(increase);
     }
+    //calls the Stat class's debuff(int) function on specified stat
     public void decreaseStat(int statID, int decrease){
         stats[statID].debuff(decrease);
     }
+    
     //effect altering
+    //adds the inputted effect to the ArrayList<Effect> effects. if the list already has the same effect, it refreshes the duration instead.
     public void giveEffect(Effect e){
         for(Effect f:effects){
             if(f.getName().equals(e.getName())){
@@ -115,10 +128,12 @@ public class BattleEntity {
         effects.add(e);
         e.assign(this);
     }
+    //removes the effect at index i from the effects arrayList
     public void removeEffect(int e){
         effects.get(e).remove(this);
         effects.remove(e);
     }
+    //goes through the ArrayList effect and calls all onTick effects
     public void tickAllEffects(){
         for(int i=effects.size()-1;i>=0;i--){
             effects.get(i).onTick(this);
@@ -128,7 +143,9 @@ public class BattleEntity {
             }
         }
     }
+    
     //skill altering
+    //adds the BattleAction to the ArrayList skills
     public void addSkill(BattleAction e){
         skills.add(e);
         e.setCaster(this);
@@ -190,6 +207,7 @@ public class BattleEntity {
         return 100-getMpPercentile();
     }
     //prints for testing
+    //outdated functions, with the implementation of Foreground
     public void printhpmp(){
         System.out.printf("%d/%d hp\n", stats[HP].getStat(),stats[HP].getMax());
         System.out.printf("%d/%d mp\n", stats[MP].getStat(),stats[MP].getMax());
@@ -242,19 +260,23 @@ public class BattleEntity {
             System.out.printf("%s increased by %d\n",name,change);
         }
         //stat altering
+        //increases modifiedbase and currentStat by the increase number. 
         public void buff(int increase){
             currentStat+=increase;
             modifiedBase+=increase;
         }
+        //reduces the modifedbase and currentstat by the decrease number
         public void debuff(int decrease){
             currentStat-=decrease;
             modifiedBase-=decrease;
             if(currentStat<=0)
                 currentStat=1;
         }
+        //reduces the currentStat by the decrease number, to a minimum of 0
         public void damage(int decrease){
             currentStat-=decrease;
         }
+        //increases the curretnStat by the increase number, to a maximum of modifiedBase
         public void heal(int increase){
             currentStat+=increase;
             if(currentStat>modifiedBase)
@@ -268,6 +290,7 @@ public class BattleEntity {
         public double getGrowth(){return growth;}
         public double getOverflow(){return overflow;}
         public String getName(){return name;}
+        //returns the .upper form of the first 3 letters of strength, dexterity, etc. for the 2 length ones it returns the name
         public String getShortName(){return name.length()<3?name:name.subSequence(0, 3).toString().toUpperCase();}
         //sets
         public void setBase(int base){
