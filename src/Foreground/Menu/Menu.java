@@ -47,8 +47,8 @@ public class Menu extends HandlerMenu{
         options = new MOptions(400,0,240,480,Color.RED);
         party = new MParty(p,0,0,400,480,Color.YELLOW);
         inventory = new MInventory(i,0,0,400,480,Color.CYAN);
-        skills = new MSkills(p.getMember(0),0,0,400,480,Color.green);
-        equipment = new MEquipment(p.getMember(0));
+        skills = new MSkills(0,0,400,480,Color.green);
+        equipment = new MEquipment();
         loadedMenu = party;
         //loadedMenu.toggleSelectorVisible();
     }

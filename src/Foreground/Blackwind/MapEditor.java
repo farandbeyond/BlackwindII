@@ -9,10 +9,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
@@ -35,7 +37,9 @@ import javax.swing.JTextArea;
  *
  * @author Connor
  */
-public class MapEditor extends JPanel implements ActionListener, MouseListener{
+public class MapEditor extends JPanel implements ActionListener, MouseListener, MouseMotionListener{
+    private static int lastMouseButtonPressed = 0;
+    
     private static MapEditor editor;
     private static JFrame window;
     
@@ -213,6 +217,41 @@ public class MapEditor extends JPanel implements ActionListener, MouseListener{
                 add(destinationY);
                         */
 	}
+    
+    public void mapMouseEvent(int mouseX, int mouseY){
+        Point mousePoint = new Point(mouseX, mouseY);
+        mapChanged = true;
+        //Get the x and y of the square we clicked on
+        int squareX = mouseX/32;
+        int squareY = mouseY/32;
+        //Only do this if we are inside our map
+        repaint();
+        if(squareX >= mapWidth.getSelectedIndex()+3 || squareY >= mapHeight.getSelectedIndex()+3 || !mapLoaded){
+            //this is done  if the click happened outside map boundaries
+            if(palette.isWithin(mousePoint)){
+                //System.out.println(me.getPoint());
+                switch(lastMouseButtonPressed){
+                    case MouseEvent.BUTTON1:tileIDLeft=palette.getTileAt(mousePoint).getID();break;
+                    case MouseEvent.BUTTON3:tileIDRight=palette.getTileAt(mousePoint).getID();break;
+                }
+            }
+        }else{
+            //this is done if the click happened inside map boundaries
+            if(loadedMap.getX()!=mapWidth.getSelectedIndex()+3){
+                loadedMap.setWidth(mapWidth.getSelectedIndex()+3);
+                System.out.println(loadedMap.mapWidth);
+            }
+            if(loadedMap.getY()!=mapHeight.getSelectedIndex()+3){
+                loadedMap.setHeight(mapHeight.getSelectedIndex()+3);
+                System.out.println(loadedMap.mapHeight);
+            }
+            switch(lastMouseButtonPressed){
+                case MouseEvent.BUTTON1:loadedMap.setTile(tileIDLeft, squareX, squareY);break;
+                case MouseEvent.BUTTON3:loadedMap.setTile(tileIDRight, squareX, squareY);break;
+                case MouseEvent.BUTTON2:loadedMap.setTileGroup(tileIDLeft,squareX,squareY);break;
+            }
+        }
+    }
     public static void setupMenu(){
         menuBar = new JMenuBar();
         file = new JMenu("File [TODO]");
@@ -265,6 +304,7 @@ public class MapEditor extends JPanel implements ActionListener, MouseListener{
                 }catch(Map.MapBadIndex e){
                     thisTile = new Tile(0);
                 }
+                
                 g.drawImage(thisTile.getImage(), col*32, row*32, 32, 32, null);
                 
             }
@@ -317,40 +357,12 @@ public class MapEditor extends JPanel implements ActionListener, MouseListener{
     }
     @Override
     public void mousePressed(MouseEvent me) {
-        mapChanged = true;
-        //Get the x and y of the square we clicked on
-        int squareX = me.getX()/32;
-        int squareY = me.getY()/32;
-        //Only do this if we are inside our map
-        repaint();
-        if(squareX >= mapWidth.getSelectedIndex()+3 || squareY >= mapHeight.getSelectedIndex()+3 || !mapLoaded){
-            //this is done  if the click happened outside map boundaries
-            if(palette.isWithin(me.getPoint())){
-                //System.out.println(me.getPoint());
-                switch(me.getButton()){
-                    case MouseEvent.BUTTON1:tileIDLeft=palette.getTileAt(me.getPoint()).getID();break;
-                    case MouseEvent.BUTTON3:tileIDRight=palette.getTileAt(me.getPoint()).getID();break;
-                }
-            }
-        }else{
-            //this is done if the click happened inside map boundaries
-            if(loadedMap.getX()!=mapWidth.getSelectedIndex()+3){
-                loadedMap.setWidth(mapWidth.getSelectedIndex()+3);
-                System.out.println(loadedMap.mapWidth);
-            }
-            if(loadedMap.getY()!=mapHeight.getSelectedIndex()+3){
-                loadedMap.setHeight(mapHeight.getSelectedIndex()+3);
-                System.out.println(loadedMap.mapHeight);
-            }
-            switch(me.getButton()){
-                case MouseEvent.BUTTON1:loadedMap.setTile(tileIDLeft, squareX, squareY);break;
-                case MouseEvent.BUTTON3:loadedMap.setTile(tileIDRight, squareX, squareY);break;
-                case MouseEvent.BUTTON2:loadedMap.setTileGroup(tileIDLeft,squareX,squareY);break;
-            }
-        }
+        lastMouseButtonPressed = me.getButton();
+        mapMouseEvent(me.getX(),me.getY());
     }
     @Override
     public void mouseReleased(MouseEvent me) {
+        lastMouseButtonPressed = MouseEvent.NOBUTTON;
     }
     @Override
     public void mouseEntered(MouseEvent me) {
@@ -385,6 +397,7 @@ public class MapEditor extends JPanel implements ActionListener, MouseListener{
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
 		editor.addMouseListener(editor);
+                editor.addMouseMotionListener(editor);
 		window.addWindowListener(new WindowListener(){
 			public void windowClosing(WindowEvent e){
 				if(mapChanged){
@@ -410,6 +423,17 @@ public class MapEditor extends JPanel implements ActionListener, MouseListener{
 			public void windowOpened(WindowEvent e) {}
 		});
 	}
+
+    @Override
+    public void mouseDragged(MouseEvent me) {
+        //mousePressed(me);
+        mapMouseEvent(me.getX(),me.getY());
+        //System.out.println("Dragged");
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent me) {
+    }
 
     
 }

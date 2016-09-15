@@ -89,6 +89,9 @@ public class Battle extends HandlerMenu{
     ArrayList<TargetedSkill> skills;
     boolean battleOver;
     String assistText;
+    public Battle(){
+        this(new Party(4),new Set(3), new Inventory(15));
+    }
     public Battle(Party p, Set s, Inventory inv) {
         this.setPreferredSize(new Dimension(640,480));
         
@@ -98,9 +101,9 @@ public class Battle extends HandlerMenu{
         partyBoxes = new EntityBox[4];
         enemyBoxes = new EntityBox[3];
         skills = new ArrayList<>();
-        m = new Menu(p.getMember(0));
+        m = new Menu();
         tar = new targetSelector();
-        b = new DetailedEntityBox(p.getMember(0),boxWidth+1,480-200,248,199);
+        b = new DetailedEntityBox(boxWidth+1,480-200,248,199);
         for(int i=0;i<4;i++){
             try{
                 partyBoxes[i]=new EntityBox(p.getMember(i),0,280+50*i,boxWidth,50);
@@ -272,6 +275,7 @@ public class Battle extends HandlerMenu{
                     selectTarget(actionToReturn,new UseItem(m.getMember(),inv.getItem(m.getSelectorPosition()+m.getCurrOffset())));
             }
         }
+        m.loadMenuOptions();
         resetEvents();
     }
     public void selectSkill(TargetedSkill actionToReturn){
@@ -284,6 +288,7 @@ public class Battle extends HandlerMenu{
                     selectTarget(actionToReturn,m.getMember().getSkill(m.getSelectorPosition()+m.getCurrOffset()));
             }
         }
+        m.loadMenuOptions();
         resetEvents();
     }
     public void selectTarget(TargetedSkill t,BattleAction skill){
@@ -366,16 +371,16 @@ public class Battle extends HandlerMenu{
         }
     }
     
-    public class Menu extends SelectorMenu{
+    private class Menu extends SelectorMenu{
         private static final int MAIN=0,ITEMS=1,SKILLS=2;
         PartyMember loaded;
         String[] options;
         int loadedMenu;
         boolean turnOver;
-        Menu(PartyMember p){
+        Menu(){
             //30*8 = 240
             super(8,400,200,239,279,30,40,33,new Color(255,0,255));
-            loaded=p;
+            //loaded=p;
             turnOver = false;
             options = new String[8];
             loadMenuOptions();

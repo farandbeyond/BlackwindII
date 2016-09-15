@@ -178,8 +178,10 @@ public class Map {
     }
     public void setTileGroup(int newID, int x,int y){
         //this function is recursive
+        if(newID==getTile(x,y).getID())
+            return;
         int myOldId = getTile(x,y).getID();
-        System.out.println(myOldId);
+        //System.out.println(myOldId);
         setTile(newID,x,y);
         try{
             if(getTile(x-1,y).getID()==myOldId)

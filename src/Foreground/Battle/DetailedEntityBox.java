@@ -19,8 +19,8 @@ import java.awt.Graphics;
  */
 public class DetailedEntityBox extends EntityBox{
 
-    public DetailedEntityBox(BattleEntity b, int myX, int myY, int myWidth, int myHeight) {
-        super(b, myX, myY, myWidth, myHeight, myX, myX+myWidth/2, myY);
+    public DetailedEntityBox(int myX, int myY, int myWidth, int myHeight) {
+        super(null, myX, myY, myWidth, myHeight, myX, myX+myWidth/2, myY);
     }
 
     @Override

@@ -20,10 +20,10 @@ import java.util.ArrayList;
  */
 public class MSkills extends SelectorMenu{
     PartyMember loadedMember;
-    public MSkills(PartyMember e, int x, int y, int width, int height, Color c) {
+    public MSkills(int x, int y, int width, int height, Color c) {
         super(9, x, y, width, height,60,40,40, c);
-        loadNewMember(e);
-        setMaxOffsetAct(e.getSkillList());
+        //loadNewMember(e);
+        //setMaxOffsetAct(e.getSkillList());
     }
     
     @Override

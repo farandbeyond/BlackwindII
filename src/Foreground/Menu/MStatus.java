@@ -20,6 +20,10 @@ import javax.swing.JFrame;
  */
 public class MStatus extends SelectorMenu{
     PartyMember m;
+    public MStatus(){
+        super(0,0,0,400,480,0,0,0,Color.magenta);
+        m=null;
+    }
     public MStatus(PartyMember m){
         super(0,0,0,400,480,0,0,0,Color.magenta);
         this.m = m;
@@ -69,7 +73,7 @@ public class MStatus extends SelectorMenu{
         frame.setResizable(true);
         frame.setDefaultCloseOperation(3); //exit on close
         frame.setSize(640, 480);
-        MStatus m = new MStatus(EntityLoader.loadPartyMember(0));
+        MStatus m = new MStatus();
         //MItemStatus m = new MItemStatus(Items.Load(Items.MAGICCANE, 3));
         frame.add(m);
         //Thread.sleep(1000);

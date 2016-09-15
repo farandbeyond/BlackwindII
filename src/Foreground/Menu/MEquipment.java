@@ -20,9 +20,9 @@ import java.awt.Graphics;
  */
 public class MEquipment extends SelectorMenu{
     PartyMember m;
-    public MEquipment(PartyMember m){
+    public MEquipment(){
         super(3,0,0,400,480,150,100,30,Color.magenta);
-        this.m=m;
+        //this.m=m;
     }
     public void updateEquipper(PartyMember m){this.m=m;}
     public void paint(Graphics g){
