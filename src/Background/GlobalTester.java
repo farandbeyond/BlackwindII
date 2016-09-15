@@ -10,6 +10,8 @@ import Background.Items.ItemTester;
  *
  * @author Connor
  */
+
+//this class is outdated. no point in keeping it around other than to preserve file structure
 public class GlobalTester {
     public static void main(String[] args){
         BattleEntity.main(args);

@@ -31,7 +31,6 @@ public class EffectSpell extends Spell{
             return true;
         return false;
     }
-    
     @Override
     public String cast(BattleEntity target) {
         useMp();

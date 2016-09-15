@@ -15,7 +15,6 @@ import java.util.Random;
 public class HealingSpell extends Spell{
     private final int baseHeal, rollHeal;
     private final boolean revives;
-    //Random rand;
     public HealingSpell(int id,BattleEntity caster,String name, String description, int baseHeal, int rollHeal,boolean revives, int cost){
         super(id,caster,name,description,cost,Element.NEUTRAL);
         this.baseHeal=baseHeal;
@@ -39,7 +38,6 @@ public class HealingSpell extends Spell{
             return true;
         return false;
     }
-    
     @Override
     public String cast(BattleEntity target) {
         int heal = 0;
@@ -55,15 +53,12 @@ public class HealingSpell extends Spell{
             return String.format("%s healed %s for %d with %s", getCaster().getName(),target.getName(),heal,getName());
         }
     }
-
     @Override
     public int getInflictedDamage(BattleEntity target, int heal) {
         heal+=getCaster().getStat(BattleEntity.INT).getStat()/3;
         heal+=baseHeal+rand.nextInt(rollHeal);
         return heal;
     }
-    
-    
     //gets
     public int getBaseHeal(){return baseHeal;}
     public int getRollHeal(){return rollHeal;}

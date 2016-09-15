@@ -14,7 +14,7 @@ import java.util.Random;
  */
 public class DamageSpell extends Spell{
     private final int baseDamage, rollDamage;
-    Random rand;
+    
     public DamageSpell(int id,BattleEntity caster,String name, String description, int baseDamage, int rollDamage, int element, int cost){
         super(id,caster,name,description,cost,element);
         this.baseDamage=baseDamage;
@@ -62,7 +62,6 @@ public class DamageSpell extends Spell{
     public int getBaseDamage(){return baseDamage;}
     public int getRollDamage(){return rollDamage;}
     public int getMaxDamage(){return baseDamage+rollDamage;}
-    //public int getElement(){return element;}
     public boolean targetsAllies(){return false;}
     
 }

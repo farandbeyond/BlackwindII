@@ -14,8 +14,6 @@ import java.util.Random;
  */
 public class PhysicalAction extends BattleAction{
     private int baseDamage, rollDamage;
-    private Random rand;
-    private int element;
     private int damageStat, resistStat;
     
     public PhysicalAction(int id,BattleEntity caster,String name, String description,int baseDamage, int rollDamage, int damageStat, int resistStat, int element){
@@ -24,7 +22,6 @@ public class PhysicalAction extends BattleAction{
         this.resistStat=resistStat;
         this.baseDamage=baseDamage;
         this.rollDamage = rollDamage;
-        this.element=element;
         rand = new Random();
     }
     public PhysicalAction(int id,String name, String description,int baseDamage, int rollDamage, int damageStat, int resistStat, int element){
@@ -33,7 +30,6 @@ public class PhysicalAction extends BattleAction{
         this.resistStat=resistStat;
         this.baseDamage=baseDamage;
         this.rollDamage = rollDamage;
-        this.element=element;
         rand = new Random();
     }
 
@@ -75,7 +71,6 @@ public class PhysicalAction extends BattleAction{
     public int getBaseDamage(){return baseDamage;}
     public int getRollDamage(){return rollDamage;}
     public int getMaxDamage(){return baseDamage+rollDamage;}
-    public int getElement(){return element;}
     public int getDamageStat(){return damageStat;}
     public int getResistStat(){return resistStat;}
     public boolean targetsAllies(){return false;}

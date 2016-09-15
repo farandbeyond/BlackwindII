@@ -16,13 +16,11 @@ import Background.Items.Item;
  * @author Connor
  */
 public class UseItem extends BattleAction{
-
     Item item;
     public UseItem(BattleEntity caster, Item i){
         super(0,caster,i.getName(),"Uses the item",Element.NEUTRAL);
         item = i;
     }
-
     @Override
     public boolean canExecuteOn(BattleEntity target) {
         if(item.getQuantity()>0&&!target.isDead())
